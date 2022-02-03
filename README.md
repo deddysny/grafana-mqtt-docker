@@ -9,4 +9,4 @@ docker-compose build
 cd grafana-mqtt-docker
 docker-compose up -d
 
-Then open http://localhost:3000 in your browser and login with the usernameadmin and password admin.
+Then open http://localhost:3000 in your browser and login with the username admin and password admin.
