@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+    grafana-mqtt:
+        build: .
+        ports:
+            - '3000:3000'
+        hostname: grafana
+        restart: unless-stopped
+        volumes:
+            - type: volume
+              source: grafana_storage
+              target: /var/lib/grafana
+        networks:
+            - 'int_net'
+            - 'ext_net'
+    mosquitto:
+        ports:
+            - '1883:1883'
+            - '9001:9001'
+        hostname: mosquitto
+        restart: unless-stopped
+        image: eclipse-mosquitto
+        command: 'mosquitto -c /mosquitto-no-auth.conf'
+        networks:
+            - 'int_net'
+            - 'ext_net'
+
+networks:
+    int_net:
+        internal: true
+    ext_net:
+
+volumes:
+    grafana_storage:
